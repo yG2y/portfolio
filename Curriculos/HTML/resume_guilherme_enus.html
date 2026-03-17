@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guilherme Souza — Resume</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      font-size: 10.8px;
+      color: #222;
+      background: #fff;
+      line-height: 1.45;
+    }
+    .header { background: #563d80; color: #fff; padding: 18px 32px 15px; }
+    .header h1 { font-size: 21px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px; }
+    .header .subtitle { font-size: 11.5px; color: #c8d8ec; font-weight: 400; margin-bottom: 8px; }
+    .contact-row { display: flex; flex-wrap: wrap; gap: 14px; font-size: 10px; color: #d0e3f5; }
+    .contact-row a { color: #d0e3f5; text-decoration: none; }
+    .page { display: grid; grid-template-columns: 1fr 255px; gap: 0; max-width: 900px; margin: 0 auto; }
+    .col-main { padding: 18px 22px 18px 30px; border-right: 1px solid #dddddd; }
+    .col-side { padding: 18px 18px 18px 18px; background: #fafafa; }
+    .section { margin-bottom: 16px; page-break-inside: avoid; }
+    .section-title {
+      font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.4px;
+      color: #563d80; border-bottom: 1.5px solid #cccccc; padding-bottom: 3px; margin-bottom: 10px;
+    }
+    .summary {
+      font-style: italic; font-size: 10.3px; color: #444;
+      border-left: 3px solid #cccccc; padding: 7px 11px;
+      margin-bottom: 16px; background: #fff; line-height: 1.55;
+    }
+    .summary strong { font-style: normal; color: #563d80; }
+    .exp-item { margin-bottom: 13px; page-break-inside: avoid; }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1px; }
+    .exp-role { font-size: 11px; font-weight: 700; color: #563d80; }
+    .exp-date { font-size: 9.5px; color: #666; white-space: nowrap; margin-left: 8px; }
+    .exp-company { font-size: 10px; color: #555; margin-bottom: 4px; }
+    .exp-company em { font-style: italic; font-size: 9.5px; color: #888; }
+    .exp-bullets { padding-left: 13px; }
+    .exp-bullets li { margin-bottom: 2px; font-size: 10.3px; color: #333; }
+    .exp-bullets li strong { color: #563d80; }
+    .tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px; }
+    .tag { background: #f0f0f0; color: #333; font-size: 9px; padding: 2px 6px; border-radius: 3px; border: 1px solid #ddd; }
+    .project-item { margin-bottom: 11px; page-break-inside: avoid; }
+    .project-name { font-size: 10.5px; font-weight: 700; color: #563d80; margin-bottom: 2px; }
+    .project-desc { font-size: 10.3px; color: #444; line-height: 1.45; }
+    .project-links { font-size: 9px; margin-top: 3px; display: flex; gap: 10px; }
+    .project-links a { color: #563d80; text-decoration: none; border-bottom: 1px solid #ccc; padding-bottom: 1px; }
+    .project-badge { display: inline-block; font-size: 8.5px; color: #666; border: 1px solid #ccc; padding: 1px 5px; border-radius: 3px; margin-left: 5px; vertical-align: middle; }
+    .skill-group { margin-bottom: 10px; page-break-inside: avoid; }
+    .skill-group-title { font-size: 9px; font-weight: 700; color: #555; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: 3px; }
+    .skill-chip { background: #f0f0f0; color: #333; font-size: 9px; padding: 2px 6px; border-radius: 3px; border: 1px solid #ddd; }
+    .soft-list { list-style: none; padding: 0; }
+    .soft-list li { font-size: 10px; color: #444; padding: 2px 0; border-bottom: 1px solid #eeeeee; }
+    .soft-list li:last-child { border-bottom: none; }
+    .edu-item { margin-bottom: 10px; page-break-inside: avoid; }
+    .edu-degree { font-size: 10.5px; font-weight: 700; color: #563d80; }
+    .edu-school { font-size: 10px; color: #555; }
+    .edu-period { font-size: 9.5px; color: #777; }
+    .cert-list { list-style: none; padding: 0; }
+    .cert-list li { font-size: 10px; color: #444; padding: 2px 0; border-bottom: 1px solid #eeeeee; }
+    .cert-list li:last-child { border-bottom: none; }
+    .lang-item { display: flex; justify-content: space-between; align-items: center; padding: 3px 0; border-bottom: 1px solid #eeeeee; font-size: 10px; }
+    .lang-item:last-child { border-bottom: none; }
+    .lang-name { font-weight: 600; color: #333; }
+    .lang-level { color: #666; }
+    .footer { text-align: center; font-size: 9px; color: #aaa; padding: 8px 0 12px; border-top: 1px solid #eeeeee; margin-top: 4px; }
+    @media print {
+      @page { margin: 10mm 10mm; size: A4; }
+      body { font-size: 10.5px; }
+      .page { max-width: 100%; }
+      .col-side { background: #fafafa !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .section, .exp-item, .project-item, .edu-item, .skill-group { page-break-inside: avoid; }
+    }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Guilherme Souza</h1>
+  <div class="subtitle">Software Developer &amp; Data Analyst</div>
+  <div class="contact-row">
+    <span>Belo Horizonte, Brazil</span>
+    <span><a href="https://github.com/yG2y">github.com/yG2y</a></span>
+    <span><a href="https://linkedin.com/in/g2souza">linkedin.com/in/g2souza</a></span>
+  </div>
+</div>
+<div class="page">
+  <div class="col-main">
+    <div class="summary">
+      Software Developer and Data Analyst with <strong>3+ years of experience</strong> in full-stack development,
+      data analysis, and technology project coordination. Currently at <strong>Vale</strong> (one of the world's
+      largest mining companies), I act as a strategic bridge between business and technology: gathering requirements,
+      prioritizing deliveries, and ensuring robust, scalable solutions using <strong>Power Apps, Power Automate,
+      Power BI, Python</strong> and <strong>Java/Spring Boot</strong>. Pursuing a B.Sc. in Software Engineering
+      at PUC Minas (7th semester). Goal: to grow into <strong>Solution Architecture</strong> and technology
+      project management with real strategic impact.
+    </div>
+    <div class="section">
+      <div class="section-title">Professional Experience</div>
+      <div class="exp-item">
+        <div class="exp-header"><span class="exp-role">Data &amp; Process Automation Analyst</span><span class="exp-date">Nov 2024 – Present</span></div>
+        <div class="exp-company">Vale &middot; Belo Horizonte, Brazil</div>
+        <ul class="exp-bullets">
+          <li>Served as <strong>technical focal point</strong> between outsourced team, stakeholders, and the Environmental Licensing Board — managing requirements, scope, and delivery quality across <strong>4 systems (Power Apps + Web)</strong></li>
+          <li>Achieved a <strong>92% bug resolution rate</strong> independently, reducing dependency on the contracted vendor</li>
+          <li>Delivered <strong>100% bug coverage on VBA automations</strong> requested by the Board, ensuring operational continuity of critical management tools</li>
+          <li>Implemented solutions in <strong>Power Apps, Power Automate, and SharePoint</strong>; data processing and business rule modeling</li>
+          <li>Provided technical support for <strong>2 internal Vale web systems</strong>: fault diagnosis, maintenance, and alignment with corporate IT teams</li>
+          <li>Data analysis and BI using <strong>Power BI, Python, and Excel</strong>, converting operational data into strategic indicators</li>
+        </ul>
+        <div class="tags"><span class="tag">Power Apps</span><span class="tag">Power Automate</span><span class="tag">Power BI</span><span class="tag">Python</span><span class="tag">VBA</span><span class="tag">JavaScript</span><span class="tag">SharePoint</span><span class="tag">Scrum</span></div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header"><span class="exp-role">Teaching Assistant — Interdisciplinary Work: Applications for Business Processes</span><span class="exp-date">Sep 2024 – Present</span></div>
+        <div class="exp-company">PUC Minas &middot; Belo Horizonte, Brazil</div>
+        <ul class="exp-bullets"><li>Mentored students in Web Interface Development integrated with Databases following <strong>BPMN</strong> documentation</li></ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header"><span class="exp-role">Fullstack Developer PHP/TypeScript</span><span class="exp-date">Aug 2024 – Nov 2024</span></div>
+        <div class="exp-company">Teknisa &middot; Belo Horizonte, Brazil <em>(Left for an approved offer at Vale)</em></div>
+        <ul class="exp-bullets">
+          <li>Developed features for <strong>Techfood</strong> — a collective meal management system — using PHP, Vue 3, TypeScript, and SQL in a microservices architecture with RESTful APIs</li>
+          <li>Gathered requirements, performed periodic testing, maintenance, and collaborated on architecture decisions</li>
+        </ul>
+        <div class="tags"><span class="tag">PHP</span><span class="tag">Vue.js 3</span><span class="tag">TypeScript</span><span class="tag">SQL</span><span class="tag">Microservices</span><span class="tag">REST API</span></div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header"><span class="exp-role">Fullstack Developer Java/Vue</span><span class="exp-date">Jun 2022 – Jun 2024</span></div>
+        <div class="exp-company">Recivil — Civil Registry Officers' Union &middot; Belo Horizonte, Brazil</div>
+        <ul class="exp-bullets">
+          <li>Built an asset management system using <strong>Java Spring Boot, Vue 2</strong>, and SQL</li>
+          <li>Gathered requirements, performed periodic testing, maintenance, and supervised the IT department</li>
+        </ul>
+        <div class="tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Vue.js 2</span><span class="tag">SQL</span></div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header"><span class="exp-role">Teaching Assistant — Interdisciplinary Work: Web Interface Development</span><span class="exp-date">Aug 2023 – Dec 2023</span></div>
+        <div class="exp-company">PUC Minas &middot; Belo Horizonte, Brazil</div>
+        <ul class="exp-bullets"><li>Mentored students in Web Interface Development integrated with HTML5, CSS3, JavaScript, jQuery, Bootstrap</li></ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Projects</div>
+      <div class="project-item">
+        <div class="project-name">Distributed Logistics System <span class="project-badge">Public</span></div>
+        <div class="project-desc">Full distributed system with <strong>5 Java Spring Boot microservices</strong>, JWT API Gateway, <strong>RabbitMQ</strong> event messaging, <strong>AWS Lambda simulation</strong> (Python), and <strong>Flutter</strong> mobile app — entire infrastructure orchestrated via Docker Compose: <strong>PostgreSQL</strong>, RabbitMQ, and all services running as independent containers on the same Docker network. Includes end-to-end automated order tracking with event-driven notifications.</div>
+        <div class="project-links">
+          <a href="https://github.com/yG2y/Sistema-de-Logistica-Distribuida">&#x1F4BB; github.com/yG2y/Sistema-de-Logistica-Distribuida</a>
+          <a href="https://deepwiki.com/yG2y/Sistema-de-Logistica-Distribuida">&#x1F4D6; DeepWiki — Architecture Docs</a>
+        </div>
+        <div class="tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">RabbitMQ</span><span class="tag">Docker</span><span class="tag">AWS Lambda</span><span class="tag">Python</span><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">PostgreSQL</span><span class="tag">Microservices</span></div>
+      </div>
+      <div class="project-item">
+        <div class="project-name">Task Management System with Java Spring Boot + React | Full CRUD with Cloud API Deployment <span class="project-badge">Public</span></div>
+        <div class="project-desc">Task management system with full <strong>CRUD</strong> — deadline enforcement, priority levels and status control. Built with <strong>Java 21, Spring Boot 3, Hibernate/JPA, PostgreSQL</strong> (HikariCP connection pool) and <strong>React</strong> frontend. API deployed to production on <strong>Render</strong> with <strong>OpenAPI 3 (Swagger UI)</strong> documentation.</div>
+        <div class="project-links">
+          <a href="https://lab-des-soft.onrender.com/api/swagger-ui/index.html#">&#x1F517; Live Demo (Swagger)</a>
+          <a href="https://github.com/yG2y/lab-des-soft">&#x1F4BB; github.com/yG2y/lab-des-soft</a>
+          <a href="https://deepwiki.com/yG2y/lab-des-soft">&#x1F4D6; DeepWiki — Architecture Docs</a>
+        </div>
+      </div>
+      <div class="project-item">
+        <div class="project-name">Recivil Asset Management System <span class="project-badge">Private</span></div>
+        <div class="project-desc">Intranet software for asset control built with <strong>Java, Spring Boot, Vue 2, and SQL</strong>.</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-side">
+    <div class="section">
+      <div class="section-title">Technical Skills</div>
+      <div class="skill-group"><div class="skill-group-title">Languages</div><div class="skill-chips"><span class="skill-chip">Java</span><span class="skill-chip">Python</span><span class="skill-chip">TypeScript</span><span class="skill-chip">PHP</span><span class="skill-chip">JavaScript</span><span class="skill-chip">C</span><span class="skill-chip">SQL</span><span class="skill-chip">VBA</span></div></div>
+      <div class="skill-group"><div class="skill-group-title">Frontend</div><div class="skill-chips"><span class="skill-chip">Vue.js 2/3</span><span class="skill-chip">React</span><span class="skill-chip">Next.js</span><span class="skill-chip">HTML5</span><span class="skill-chip">CSS3/SCSS</span><span class="skill-chip">Tailwind</span><span class="skill-chip">Bootstrap</span></div></div>
+      <div class="skill-group"><div class="skill-group-title">Backend &amp; Cloud</div><div class="skill-chips"><span class="skill-chip">Spring Boot</span><span class="skill-chip">Maven</span><span class="skill-chip">PostgreSQL</span><span class="skill-chip">Supabase</span><span class="skill-chip">REST API</span><span class="skill-chip">Microservices</span><span class="skill-chip">Docker</span><span class="skill-chip">RabbitMQ</span><span class="skill-chip">AWS Lambda</span><span class="skill-chip">Flutter</span><span class="skill-chip">Render</span></div></div>
+      <div class="skill-group"><div class="skill-group-title">Data &amp; Platforms</div><div class="skill-chips"><span class="skill-chip">Power BI</span><span class="skill-chip">Power Apps</span><span class="skill-chip">Power Automate</span><span class="skill-chip">SharePoint</span><span class="skill-chip">Advanced Excel</span></div></div>
+      <div class="skill-group"><div class="skill-group-title">Tools &amp; Methods</div><div class="skill-chips"><span class="skill-chip">Git/GitHub</span><span class="skill-chip">Swagger</span><span class="skill-chip">BPMN</span><span class="skill-chip">Scrum</span><span class="skill-chip">Software Architecture</span></div></div>
+    </div>
+    <div class="section">
+      <div class="section-title">Soft Skills</div>
+      <ul class="soft-list"><li>Requirements Management</li><li>Project Coordination</li><li>Business Analysis</li><li>Technical Communication</li><li>Technical Leadership</li><li>Decision Making</li></ul>
+    </div>
+    <div class="section">
+      <div class="section-title">Education</div>
+      <div class="edu-item"><div class="edu-degree">B.Sc. in Software Engineering</div><div class="edu-school">PUC Minas</div><div class="edu-period">2022 – 2026 (7th Semester)</div></div>
+      <div class="edu-item"><div class="edu-degree">Reserve Officer — Logistics</div><div class="edu-school">Brazilian Army</div><div class="edu-period">Feb 2021 – Dec 2021</div></div>
+    </div>
+    <div class="section">
+      <div class="section-title">Certifications</div>
+      <ul class="cert-list"><li>Java Basic Certificate</li><li>Red Hat System Administration I (RH124)</li></ul>
+    </div>
+    <div class="section">
+      <div class="section-title">Languages</div>
+      <div class="lang-item"><span class="lang-name">Portuguese</span><span class="lang-level">Native</span></div>
+      <div class="lang-item"><span class="lang-name">English</span><span class="lang-level">Intermediate — Cultura Inglesa</span></div>
+    </div>
+  </div>
+</div>
+<div class="footer">Updated March 2026</div>
+</body>
+</html>
