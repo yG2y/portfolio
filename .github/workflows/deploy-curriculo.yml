@@ -1,0 +1,24 @@
+name: Deploy Currículo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Curriculos/HTML/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Push para repo Curriculum
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.CURRICULO_DEPLOY_TOKEN }}
+        with:
+          source-directory: 'Curriculos/HTML'
+          destination-github-username: 'yG2y'
+          destination-repository-name: 'Curriculum'
+          target-branch: main
+          commit-message: 'chore: atualiza currículo'
