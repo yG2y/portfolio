@@ -1,61 +1,90 @@
-# portfolio
+# Portfolio
 
-## 📜 Mensagens de Commit Semânticas
+Portfólio frontend em `Next.js` com experiência principal de terminal interativo, fallback em seções tradicionais, e base pronta para evolução com API, Supabase e Docker.
 
-Utilizar commits semânticos ajuda a manter um histórico de mudanças mais claro e organizado, facilitando a colaboração e o entendimento da evolução do projeto.
+## Estrutura do projeto
 
-Formato básico: `<tipo>(<escopo>): <assunto>`
+- `apps/web`: frontend principal (Next.js + TypeScript + Tailwind).
+- `apps/api`: backend placeholder para evolução de microsserviços.
+- `infra/docker`: Dockerfiles e compose para ambiente local integrado.
+- `docs/portfolio-architecture.md`: estratégia de evolução técnica.
 
-`<escopo>` é opcional!
+## Frontend (apps/web)
 
-Mais Exemplos:
+### Funcionalidades da V1
 
-- `feat`: (nova funcionalidade para o usuário, não uma nova funcionalidade para o script de build)
-- `fix`: (correção de um bug para o usuário, não uma correção em um script de build)
-- `docs`: (alterações na documentação)
-- `style`: (formatação, ausência de ponto e vírgula, etc.; sem mudanças no código de produção)
-- `refactor`: (refatoração de código de produção, ex.: renomear uma variável)
-- `test`: (adicionando testes que faltam, refatoração de testes; sem mudanças no código de produção)
-- `chore`: (atualização de tarefas do grunt, etc.; sem mudanças no código de produção)
+- Terminal interativo com comandos:
+  - `help`, `about`, `projects`, `skills`, `contact`, `resume`, `clear`.
+- Histórico com teclado (`ArrowUp` / `ArrowDown`).
+- Autocomplete básico de comandos com `Tab`.
+- Seções fallback: Sobre, Links rápidos, Projetos e Contato.
+- Camada de dados com fallback local + leitura opcional do Supabase.
 
-  [Leia mais sobre commits semânticos](https://www.conventionalcommits.org/)
+### Executar localmente
 
-## *Commits que fecham issues*
-
-- Existem algumas palavras que podemos utilizar na mensagem de commit, para fechar uma issue. Precisamos referenciar também, o ID da issue (aquele número que aparece na URL quando você acessa a issue). E essas palavras são:
+```bash
+cd apps/web
+npm install
+npm run dev
 ```
-fix, fixes, fixed, close, closes, closed, resolve, resolves, resolved
+
+Abrir: `http://localhost:3000`
+
+### Qualidade
+
+```bash
+cd apps/web
+npm run lint
+npm run typecheck
+npm run test
+npm run build
 ```
 
-Exemplo:
+## Configuração do Supabase (o que você precisa fazer)
+
+1. Criar projeto no Supabase.
+2. Criar as tabelas `profile` e `projects` (campos sugeridos em `docs/portfolio-architecture.md`).
+3. Habilitar `RLS` e criar política de leitura pública para dados de portfólio.
+4. Copiar as credenciais:
+   - `Project URL`
+   - `anon public key`
+5. Criar `apps/web/.env.local`:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 ```
-git commit -m "Fix error on issue #32"
+
+Sem essas variáveis, o frontend usa conteúdo local (`src/content/profile.ts`).
+
+## Docker (web + api + banco local)
+
+```bash
+docker compose -f infra/docker/docker-compose.yml up --build
 ```
-<br>
 
-Referências:
+Serviços:
+- `web`: `http://localhost:3000`
+- `api`: `http://localhost:4000/health`
+- `postgres`: `localhost:5432`
 
-- https://www.conventionalcommits.org/
-- https://seesparkbox.com/foundry/semantic_commit_messages
-- http://karma-runner.github.io/1.0/dev/git-commit-msg.html
-- https://dev.to/jhonywalkeer/hacks-do-github-commits-que-fecham-issues-2aj8
+## Deploy gratuito recomendado
 
+- Frontend Next.js: Vercel.
+- Banco: Supabase.
+- Backend containerizado futuro: Railway / Render / Fly.io (dependendo dos limites do free tier no momento).
 
-## 🤝 Colaboradores
+## Commits semânticos
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/yG2y" title="Perfil Guilherme G2">
-        <img src="https://avatars.githubusercontent.com/u/89223673?v=4" width="100px;" alt="Foto do Guilherme G2 no GitHub"/><br>
-        <sub>
-          <b>Guilherme G2</b>
-        </sub>
-      </a>
-    </td>
-  </tr>
-</table>
+Formato: `<tipo>(<escopo>): <assunto>`
 
-## 📝 Licença
+Exemplos:
+- `feat(web): adiciona terminal com histórico de comandos`
+- `fix(api): corrige endpoint de healthcheck`
+- `docs(readme): atualiza setup do Supabase`
 
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE) para mais detalhes.
+Referência: [Conventional Commits](https://www.conventionalcommits.org/)
+
+## Licença
+
+Esse projeto está sob licença. Veja [LICENSE](LICENSE).
