@@ -4,21 +4,75 @@ on:
   push:
     branches: [main]
     paths:
-      - 'Curriculos/HTML/**'
+      - 'Curriculos/**'
+      - '.github/workflows/deploy-curriculo.yml'
+  workflow_dispatch:
 
 jobs:
   deploy:
+    name: Publicar Currículo no Repositório Curriculum
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repositório
+        uses: actions/checkout@v4
 
-      - name: Push para repo Curriculum
-        uses: cpina/github-action-push-to-another-repository@main
+      - name: Preparar arquivos de publicação
+        run: |
+          mkdir -p deploy_out
+          # Copia os arquivos HTML principais para a raiz do repositório de destino
+          if [ -d "Curriculos/HTML" ]; then
+            cp -r Curriculos/HTML/* deploy_out/
+          fi
+          
+          # Garante index.html na raiz para navegação direta do GitHub Pages
+          if [ -f "deploy_out/curriculo_guilherme_ptbr.html" ]; then
+            cp deploy_out/curriculo_guilherme_ptbr.html deploy_out/index.html
+          fi
+
+          # Copia as pastas dos currículos especializados
+          if [ -d "Curriculos/Desenvolvimento_Software" ]; then
+            cp -r Curriculos/Desenvolvimento_Software deploy_out/
+          fi
+          if [ -d "Curriculos/Analise_Dados" ]; then
+            cp -r Curriculos/Analise_Dados deploy_out/
+          fi
+          if [ -d "Curriculos/Gestao_Projetos" ]; then
+            cp -r Curriculos/Gestao_Projetos deploy_out/
+          fi
+
+          # Adiciona .nojekyll para compatibilidade total com GitHub Pages
+          touch deploy_out/.nojekyll
+
+      - name: Sincronizar e Publicar no repositório Curriculum
         env:
           API_TOKEN_GITHUB: ${{ secrets.CURRICULO_DEPLOY_TOKEN }}
-        with:
-          source-directory: 'Curriculos/HTML'
-          destination-github-username: 'yG2y'
-          destination-repository-name: 'Curriculum'
-          target-branch: main
-          commit-message: 'chore: atualiza currículo'
+        run: |
+          if [ -z "$API_TOKEN_GITHUB" ]; then
+            echo "::error::Secret CURRICULO_DEPLOY_TOKEN não configurado no repositório!"
+            exit 1
+          fi
+
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Clona o repositório de destino (Curriculum)
+          git clone https://x-access-token:${API_TOKEN_GITHUB}@github.com/yG2y/Curriculum.git target_repo
+          cd target_repo
+          git checkout main || git checkout -b main
+
+          # Remove conteúdo anterior mantendo a pasta .git
+          find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
+
+          # Copia os novos arquivos preparados
+          cp -r ../deploy_out/* .
+          cp -r ../deploy_out/.nojekyll . 2>/dev/null || true
+
+          # Realiza o commit e push apenas se houver alterações
+          git add -A
+          if git diff-index --quiet HEAD; then
+            echo "Nenhuma alteração detectada para publicar."
+          else
+            git commit -m "chore(deploy): atualiza currículos publicados [skip ci]"
+            git push origin main
+            echo "Currículos publicados com sucesso em https://github.com/yG2y/Curriculum"
+          fi
