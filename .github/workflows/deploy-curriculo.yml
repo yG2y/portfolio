@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout Repositório
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Preparar arquivos de publicação
         run: |
@@ -52,12 +54,16 @@ jobs:
             exit 1
           fi
 
+          # Remove o cabeçalho de autenticação padrão injetado pelo runner
+          git config --global --unset-all http.https://github.com/.extraheader 2>/dev/null || true
+
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
           # Clona o repositório de destino (Curriculum)
-          git clone https://x-access-token:${API_TOKEN_GITHUB}@github.com/yG2y/Curriculum.git target_repo
+          git clone https://${API_TOKEN_GITHUB}@github.com/yG2y/Curriculum.git target_repo
           cd target_repo
+          git remote set-url origin https://${API_TOKEN_GITHUB}@github.com/yG2y/Curriculum.git
           git checkout main || git checkout -b main
 
           # Remove conteúdo anterior mantendo a pasta .git
