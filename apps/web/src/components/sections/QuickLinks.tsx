@@ -15,7 +15,7 @@ export function QuickLinks({ data }: QuickLinksProps) {
             href={link.url}
             target="_blank"
             rel="noreferrer noopener"
-            className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-sm text-emerald-200 hover:bg-emerald-400/20"
+            className="rounded-full border border-purple-400/30 bg-purple-400/10 px-3 py-1 text-sm text-purple-200 hover:bg-purple-400/20"
           >
             {link.label}
           </a>

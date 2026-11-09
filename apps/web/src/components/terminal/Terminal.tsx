@@ -107,7 +107,7 @@ export function Terminal({ data }: TerminalProps) {
         aria-live="polite"
       >
         {initialOutput.map((line) => (
-          <p key={line.text} className="mb-1 text-emerald-300">
+          <p key={line.text} className="mb-1 text-purple-300">
             {line.text}
           </p>
         ))}
@@ -124,7 +124,7 @@ export function Terminal({ data }: TerminalProps) {
                   href={line.href}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="block text-emerald-300 underline underline-offset-2 hover:text-emerald-200"
+                  className="block text-purple-300 underline underline-offset-2 hover:text-purple-200"
                 >
                   {line.text}
                 </a>
@@ -136,7 +136,7 @@ export function Terminal({ data }: TerminalProps) {
                   <button
                     type="button"
                         onClick={() => handleCopy(valueToCopy)}
-                    className="rounded border border-zinc-700 px-2 py-1 text-xs text-zinc-200 hover:border-emerald-400/50 hover:text-emerald-300"
+                    className="rounded border border-zinc-700 px-2 py-1 text-xs text-zinc-200 hover:border-purple-400/50 hover:text-purple-300"
                   >
                         {copiedValue === valueToCopy ? "Copiado!" : line.text}
                   </button>

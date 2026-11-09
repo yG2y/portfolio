@@ -11,6 +11,7 @@ export type PortfolioProject = {
   stack: string[];
   featured: boolean;
   order: number;
+  links?: { label: string; url: string }[];
 };
 
 export type PortfolioProfile = {

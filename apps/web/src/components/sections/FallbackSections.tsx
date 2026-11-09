@@ -25,7 +25,7 @@ export function FallbackSections({ data }: FallbackSectionsProps) {
             href={data.profile.links.github}
             target="_blank"
             rel="noreferrer noopener"
-            className="text-emerald-300 underline underline-offset-2"
+            className="text-purple-300 underline underline-offset-2 hover:text-purple-200"
           >
             GitHub
           </a>
@@ -33,7 +33,7 @@ export function FallbackSections({ data }: FallbackSectionsProps) {
             href={data.profile.links.linkedin}
             target="_blank"
             rel="noreferrer noopener"
-            className="text-emerald-300 underline underline-offset-2"
+            className="text-purple-300 underline underline-offset-2 hover:text-purple-200"
           >
             LinkedIn
           </a>

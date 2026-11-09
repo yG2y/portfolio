@@ -16,7 +16,7 @@ export function MainNav() {
           <li key={item.href}>
             <Link
               href={item.href}
-              className="inline-flex rounded-full border border-zinc-700 px-3 py-1.5 text-sm text-zinc-200 hover:border-emerald-400/40 hover:text-emerald-300"
+              className="inline-flex rounded-full border border-zinc-700 px-3 py-1.5 text-sm text-zinc-200 hover:border-purple-400/40 hover:text-purple-300"
             >
               {item.label}
             </Link>

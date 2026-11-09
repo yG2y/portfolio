@@ -2,7 +2,7 @@ import { PortfolioData } from "@/types/portfolio";
 
 export const portfolioData: PortfolioData = {
   profile: {
-    name: "Guilherme",
+    name: "Guilherme Souza",
     role: "Desenvolvedor Full Stack",
     location: "Belo Horizonte, Minas Gerais, Brasil",
     shortBio:
@@ -28,24 +28,55 @@ export const portfolioData: PortfolioData = {
   },
   projects: [
     {
+      id: "logistica-distribuida",
+      name: "Sistema de Logística Distribuída",
+      description:
+        "Planejamento e coordenação técnica de um sistema distribuído com 5 microsserviços Java Spring Boot, mensageria RabbitMQ, arquitetura serverless AWS Lambda (Python), Docker Compose e app Flutter. Inclui documentação de arquitetura orientada a eventos.",
+      url: "https://github.com/yG2y/Sistema-de-Logistica-Distribuida",
+      stack: ["Java Spring Boot", "RabbitMQ", "AWS Lambda", "Python", "Docker", "Flutter"],
+      featured: true,
+      order: 1,
+      links: [
+        { label: "Repositório GitHub", url: "https://github.com/yG2y/Sistema-de-Logistica-Distribuida" },
+        { label: "Documentação de Arquitetura (DeepWiki)", url: "https://deepwiki.com/yG2y/Sistema-de-Logistica-Distribuida" },
+      ],
+    },
+    {
+      id: "task-management-system",
+      name: "Task Management System",
+      description:
+        "Plataforma corporativa para controle de fluxo de trabalho, status, esteira de prioridades e prazos de projetos. Construída com Java 21, Spring Boot 3 e React, documentada via OpenAPI 3 (Swagger UI).",
+      url: "https://github.com/yG2y/lab-des-soft",
+      stack: ["Java 21", "Spring Boot 3", "React", "OpenAPI 3"],
+      featured: true,
+      order: 2,
+      links: [
+        { label: "Live Demo (Swagger UI)", url: "https://lab-des-soft.onrender.com/api/swagger-ui/index.html#" },
+        { label: "Repositório GitHub", url: "https://github.com/yG2y/lab-des-soft" },
+      ],
+    },
+    {
+      id: "controle-patrimonial-recivil",
+      name: "Sistema de Controle Patrimonial Recivil",
+      description:
+        "Gestão completa de ativos e inventário corporativo desenvolvido sob demanda institucional. Liderado do levantamento de requisitos até a implantação.",
+      url: "https://github.com/yG2y",
+      stack: ["Java", "Spring Boot", "Vue.js 2", "SQL"],
+      featured: false,
+      order: 3,
+    },
+    {
       id: "portfolio-terminal",
       name: "Portfolio Terminal",
       description:
-        "Portfólio interativo em Next.js com comandos de terminal e foco em UX.",
-      url: "https://github.com/yG2y",
-      stack: ["Next.js", "TypeScript", "Tailwind"],
+        "Portfólio interativo em Next.js com interface de terminal, comandos navegáveis e design dark premium.",
+      url: "https://github.com/yG2y/portfolio",
+      stack: ["Next.js", "TypeScript", "Tailwind CSS"],
       featured: true,
-      order: 1,
-    },
-    {
-      id: "curriculo-online",
-      name: "Currículo Online",
-      description:
-        "Currículo web responsivo com histórico profissional e projetos técnicos.",
-      url: "https://github.com/yG2y",
-      stack: ["HTML", "CSS", "JavaScript"],
-      featured: true,
-      order: 2,
+      order: 4,
+      links: [
+        { label: "Repositório GitHub", url: "https://github.com/yG2y/portfolio" },
+      ],
     },
   ],
   quickLinks: [

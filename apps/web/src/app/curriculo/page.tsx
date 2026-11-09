@@ -16,7 +16,7 @@ export default async function CurriculoPage() {
           href={data.profile.resumes.ptBr}
           target="_blank"
           rel="noreferrer noopener"
-          className="inline-block rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-emerald-200"
+          className="inline-block rounded-full border border-purple-400/30 bg-purple-400/10 px-4 py-2 text-purple-200 hover:bg-purple-400/20"
         >
           Currículo PT-BR
         </a>
@@ -24,7 +24,7 @@ export default async function CurriculoPage() {
           href={data.profile.resumes.enUs}
           target="_blank"
           rel="noreferrer noopener"
-          className="inline-block rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-emerald-200"
+          className="inline-block rounded-full border border-purple-400/30 bg-purple-400/10 px-4 py-2 text-purple-200 hover:bg-purple-400/20"
         >
           Resume EN-US
         </a>

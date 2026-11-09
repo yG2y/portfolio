@@ -14,8 +14,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Guilherme",
+  title: "Portfolio | Guilherme Souza",
   description: "Portfolio interativo em formato terminal com Next.js",
+  icons: {
+    icon: "/icon.jpeg",
+    shortcut: "/icon.jpeg",
+    apple: "/icon.jpeg",
+  },
 };
 
 export default function RootLayout({
